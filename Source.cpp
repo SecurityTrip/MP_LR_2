@@ -165,10 +165,10 @@ int main()
 		{
 			if(elements.size() == 0)  //если предудущих вычислений нет
 			{
+				long double an;
+				long double S = 0;
 				do
 				{
-					long double an;
-					long double S = 0;
 					an = a_n(n, x);  //n-ный элемент
 					S = S + an;  //текущая сумма
 					acc = abs(a_n(n + 1, x) / S);  //текущая точность вычисления
@@ -193,10 +193,11 @@ int main()
 				elements.clear();
 				S_elements.clear();
 				accs.clear();
+				long double an;
+				long double S = 0;
 				do
 				{
-					long double an;
-					long double S = 0;
+
 					an = a_n(n, x);  //n-ный элемент
 					S = S + an;  //текущая сумма
 					acc = abs(a_n(n + 1, x) / S);  //текущая точность вычисления
@@ -211,9 +212,9 @@ int main()
 
 					n += 1;
 				} while (a <= acc);
-
 				repeat = repeat_check();  //проверка продолжения
 			}
 		}
 	}
+	return 0;
 }
