@@ -70,7 +70,7 @@ int main()
 	double a_prev = NAN;
 	vector<long double> elements;
 	vector<long double> S_elements;
-	vector<long double> accs;
+	vector<long double> exactnesses;
 	long double an;
 	double x, a;
 	bool try_repeat;  //логическая переменная для выбора сценария работы программы
@@ -78,7 +78,7 @@ int main()
 	while(repeat != "N" && repeat != "n")
 	{
 		int n = 0;
-		long double acc;
+		long double exactness;
 
 		cout << "Enter parameter x: "; x = check_input('x');
 		if(x != x_prev)  //обнуление векторов и замена значения при ином введённом x
@@ -87,7 +87,7 @@ int main()
 			x_prev = x;
 			elements.clear();
 			S_elements.clear();
-			accs.clear();
+			exactnesses.clear();
 		}
 		
 		cout << "Enter parameter alpha: "; a = check_input('a');
@@ -95,6 +95,9 @@ int main()
 		{
 			a_prev = a;
 			try_repeat = false;
+			elements.clear();
+			S_elements.clear();
+			exactnesses.clear();
 		}
 		else
 		{
@@ -117,10 +120,10 @@ int main()
 					elements.push_back(an);
 					S = S + an;  //текущая сумма
 					S_elements.push_back(S);
-					acc = abs(a_n(x, n + 1) / S);  //текущая точность вычисления
-					accs.push_back(acc);
-					if (acc == INFINITY) {cout << "Iteration number :" << n << endl << "Last a: " << an << endl << "Current amount: " << S << endl << "Current accuraton: " << "Undefined" << endl;}
-					else {cout << "Iteration number :" << n << endl << "Last a: " << an << endl << "Current amount: " << S << endl << "Current accuraton: " << acc << endl;}
+					exactness = abs(a_n(x, n + 1) / S);  //текущая точность вычисления
+					exactnesses.push_back(exactness);
+					if (exactness == INFINITY) {cout << "Iteration number :" << n << endl << "Last a: " << an << endl << "Current amount: " << S << endl << "Current accuraton: " << "Undefined" << endl;}
+					else {cout << "Iteration number :" << n << endl << "Last a: " << an << endl << "Current amount: " << S << endl << "Current accuraton: " << exactness << endl;}
 					cout << endl;
 				}
 				repeat = repeat_check();  //проверка продолжения
@@ -131,7 +134,7 @@ int main()
 				{
 					for (n = 0; n <= a-1; n++)
 					{
-						cout << "Iteration number :" << n << endl << "Last a: " << elements[n] << endl << "Current amount: " << S_elements[n] << accs[n] << endl;
+						cout << "Iteration number :" << n << endl << "Last a: " << elements[n] << endl << "Current amount: " << S_elements[n] << exactnesses[n] << endl;
 						cout << endl;
 						
 					}
@@ -140,20 +143,22 @@ int main()
 				else
 				{
 					n = 0;
-					for (n = 0; n <= elements.size()-1; n++)
+					
+					for (n = 0; n <= elements.size() - 1; n++)
 					{
-						cout << "Iteration number :" << n << endl << "Last a: " << elements[n] << endl << "Current amount: " << S_elements[n] << endl << "Current accuraton: " <<  accs[n] << endl;
+						cout << "Iteration number :" << n << endl << "Last a: " << elements[n] << endl << "Current amount: " << S_elements[n] << endl << "Current accuraton: " << exactnesses[n] << endl;
 						cout << endl;
 					}
+					
 					for (n; n <= a-1; n++)
 					{
 						an = a_n(n, x);  //n-ный элемент
 						elements.push_back(an);
 						S = S + an;  //текущая сумма
 						S_elements.push_back(S);
-						acc = abs(a_n(x, n + 1) / S);  //текущая точность вычисления
-						accs.push_back(acc);
-						cout << "Iteration number :" << n << endl << "Last a: " << an << endl << "Current amount: " << S << endl << "Current accuraton: " << acc << endl;
+						exactness = abs(a_n(x, n + 1) / S);  //текущая точность вычисления
+						exactnesses.push_back(exactness);
+						cout << "Iteration number :" << n << endl << "Last a: " << an << endl << "Current amount: " << S << endl << "Current accuraton: " << exactness << endl;
 						cout << endl;
 						
 					}
@@ -171,20 +176,20 @@ int main()
 				{
 					an = a_n(n, x);  //n-ный элемент
 					S = S + an;  //текущая сумма
-					acc = abs(a_n(n + 1, x) / S);  //текущая точность вычисления
+					exactness = abs(a_n(n + 1, x) / S);  //текущая точность вычисления
 					elements.push_back(an);
 					S_elements.push_back(S);
 					
-					if (acc != INFINITY) 
+					if (exactness != INFINITY)
 					{
-						accs.push_back(acc);
+						exactnesses.push_back(exactness);
 					}
 
-					cout << "Iteration number :" << n << endl << "Last a: " << an << endl << "Current amount: " << S << endl << "Current accuraton: " << acc << endl;
+					cout << "Iteration number :" << n << endl << "Last a: " << an << endl << "Current amount: " << S << endl << "Current accuraton: " << exactness << endl;
 					cout << endl;
 
 					n += 1;
-				} while (a <= acc);
+				} while (a <= exactness);
 
 				repeat = repeat_check();  //проверка продолжения
 			}
@@ -192,7 +197,7 @@ int main()
 			{
 				elements.clear();
 				S_elements.clear();
-				accs.clear();
+				exactnesses.clear();
 				long double an;
 				long double S = 0;
 				do
@@ -200,18 +205,18 @@ int main()
 
 					an = a_n(n, x);  //n-ный элемент
 					S = S + an;  //текущая сумма
-					acc = abs(a_n(n + 1, x) / S);  //текущая точность вычисления
+					exactness = abs(a_n(n + 1, x) / S);  //текущая точность вычисления
 					elements.push_back(an);
 					S_elements.push_back(S);
-					if (acc != INFINITY)
+					if (exactness != INFINITY)
 					{
-						accs.push_back(acc);
+						exactnesses.push_back(exactness);
 					}
-					cout << "Iteration number :" << n << endl << "Last a: " << an << endl << "Current amount: " << S << endl << "Current accuraton: " << acc << endl;
+					cout << "Iteration number :" << n << endl << "Last a: " << an << endl << "Current amount: " << S << endl << "Current accuraton: " << exactness << endl;
 					cout << endl;
 
 					n += 1;
-				} while (a <= acc);
+				} while (a <= exactness);
 				repeat = repeat_check();  //проверка продолжения
 			}
 		}
