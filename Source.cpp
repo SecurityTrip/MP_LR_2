@@ -122,8 +122,8 @@ int main()
 					S_elements.push_back(S);
 					exactness = abs(a_n(x, n + 1) / S);  //текущая точность вычисления
 					exactnesses.push_back(exactness);
-					if (exactness == INFINITY) {cout << "Iteration number :" << n << endl << "Last a: " << an << endl << "Current amount: " << S << endl << "Current accuraton: " << "Undefined" << endl;}
-					else {cout << "Iteration number :" << n << endl << "Last a: " << an << endl << "Current amount: " << S << endl << "Current accuraton: " << exactness << endl;}
+					if (exactness == INFINITY) {cout << "Iteration number :" << n << " Last a: " << an << " Current amount: " << S <<  " Current accuraton: " << exactness << endl;}
+					else { cout << "Iteration number :" << n << " Last a: " << an << " Current amount: " << S << " Current accuraton: " << exactness << endl; }
 					cout << endl;
 				}
 				repeat = repeat_check();  //проверка продолжения
@@ -134,7 +134,7 @@ int main()
 				{
 					for (n = 0; n <= a-1; n++)
 					{
-						cout << "Iteration number :" << n << endl << "Last a: " << elements[n] << endl << "Current amount: " << S_elements[n] << exactnesses[n] << endl;
+						cout << "Iteration number :" << n  << " Last a: " << elements[n] << " Current amount: " << S_elements[n] <<" Current accuraton: " << exactnesses[n] << endl;
 						cout << endl;
 						
 					}
@@ -146,7 +146,7 @@ int main()
 					
 					for (n = 0; n <= elements.size() - 1; n++)
 					{
-						cout << "Iteration number :" << n << endl << "Last a: " << elements[n] << endl << "Current amount: " << S_elements[n] << endl << "Current accuraton: " << exactnesses[n] << endl;
+						cout << "Iteration number :" << n << " Last a: " << elements[n] << " Current amount: " << S_elements[n] << " Current accuraton: " << exactnesses[n] << endl;
 						cout << endl;
 					}
 					
@@ -158,7 +158,7 @@ int main()
 						S_elements.push_back(S);
 						exactness = abs(a_n(x, n + 1) / S);  //текущая точность вычисления
 						exactnesses.push_back(exactness);
-						cout << "Iteration number :" << n << endl << "Last a: " << an << endl << "Current amount: " << S << endl << "Current accuraton: " << exactness << endl;
+						cout << "Iteration number :" << n << " Last a: " << an << " Current amount: " << S << " Current accuraton: " << exactness << endl;
 						cout << endl;
 						
 					}
@@ -185,7 +185,7 @@ int main()
 						exactnesses.push_back(exactness);
 					}
 
-					cout << "Iteration number :" << n << endl << "Last a: " << an << endl << "Current amount: " << S << endl << "Current accuraton: " << exactness << endl;
+					cout << "Iteration number :" << n << " Last a: " << an << " Current amount: " << S << " Current accuraton: " << exactness << endl;
 					cout << endl;
 
 					n += 1;
@@ -212,7 +212,7 @@ int main()
 					{
 						exactnesses.push_back(exactness);
 					}
-					cout << "Iteration number :" << n << endl << "Last a: " << an << endl << "Current amount: " << S << endl << "Current accuraton: " << exactness << endl;
+					cout << "Iteration number :" << n << " Last a: " << an << " Current amount: " << S << " Current accuraton: " << exactness << endl;
 					cout << endl;
 
 					n += 1;
